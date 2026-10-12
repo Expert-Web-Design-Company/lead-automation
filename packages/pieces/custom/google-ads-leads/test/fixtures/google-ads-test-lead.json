@@ -1,0 +1,19 @@
+{
+  "lead_id": "TeSter-123-ABCDEFGHIJKLMNOPQRSTUVWXYZ-abcdefghijklmnopqrstuvwxyz-0123456789-AaBbCcDdEeFfGgHhIiJjKkLl",
+  "user_column_data": [
+    { "column_name": "Full Name", "string_value": "FirstName LastName", "column_id": "FULL_NAME" },
+    { "column_name": "User Phone", "string_value": "+16505550123", "column_id": "PHONE_NUMBER" },
+    { "column_name": "User Email", "string_value": "test@example.com", "column_id": "EMAIL" },
+    { "column_name": "Postal Code", "string_value": "94043", "column_id": "POSTAL_CODE" },
+    { "column_name": "Company Name", "string_value": "CompanyName", "column_id": "COMPANY_NAME" },
+    { "column_name": "Which service are you interested in?", "string_value": "Implants", "column_id": "which_service_are_you_interested_in?" }
+  ],
+  "api_version": "1.0",
+  "form_id": 40000000000,
+  "campaign_id": 20000000000,
+  "google_key": "test-key-0123456789",
+  "is_test": true,
+  "gcl_id": "TeSter-123-ABCDEFGHIJKLMNOPQRSTUVWXYZ-abcdefghijklmnopqrstuvwxyz-0123456789-AaBbCcDdEeFfGgHhIiJjKkLl",
+  "adgroup_id": 20000000000,
+  "creative_id": 30000000000
+}

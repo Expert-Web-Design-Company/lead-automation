@@ -10839,6 +10839,20 @@
         "vitest": "3.2.6",
       },
     },
+    "packages/pieces/custom/google-ads-leads": {
+      "name": "@activepieces/piece-google-ads-leads",
+      "version": "0.0.1",
+      "dependencies": {
+        "@activepieces/core-piece-types": "workspace:*",
+        "@activepieces/core-utils": "workspace:*",
+        "@activepieces/pieces-common": "workspace:*",
+        "@activepieces/pieces-framework": "workspace:*",
+      },
+      "devDependencies": {
+        "tslib": "2.6.2",
+        "vitest": "3.2.6",
+      },
+    },
     "packages/pieces/custom/our-crm": {
       "name": "@activepieces/piece-our-crm",
       "version": "0.0.1",
@@ -11861,6 +11875,8 @@
     "@activepieces/piece-gmail": ["@activepieces/piece-gmail@workspace:packages/pieces/community/gmail"],
 
     "@activepieces/piece-goodmem": ["@activepieces/piece-goodmem@workspace:packages/pieces/community/goodmem"],
+
+    "@activepieces/piece-google-ads-leads": ["@activepieces/piece-google-ads-leads@workspace:packages/pieces/custom/google-ads-leads"],
 
     "@activepieces/piece-google-bigquery": ["@activepieces/piece-google-bigquery@workspace:packages/pieces/community/google-bigquery"],
 

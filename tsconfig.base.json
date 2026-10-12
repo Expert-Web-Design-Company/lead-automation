@@ -570,6 +570,9 @@
       "@activepieces/piece-gmail": [
         "packages/pieces/community/gmail/src/index.ts"
       ],
+      "@activepieces/piece-google-ads-leads": [
+        "packages/pieces/custom/google-ads-leads/src/index.ts"
+      ],
       "@activepieces/piece-google-bigquery": [
         "packages/pieces/community/google-bigquery/src/index.ts"
       ],
