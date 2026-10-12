@@ -1,7 +1,5 @@
 import { CountryCode, isSupportedCountry, parsePhoneNumberFromString } from 'libphonenumber-js';
 
-// Field rules from .claude/CLAUDE.md §6.
-
 function fullName({ fullName, firstName, lastName }: { fullName?: string; firstName?: string; lastName?: string }): string | undefined {
   const joined = fullName?.trim() ? fullName : [firstName, lastName].filter((part) => part?.trim()).join(' ');
   const cleaned = joined?.replace(/\s+/g, ' ').trim();
@@ -13,7 +11,6 @@ function email(value?: string): string | undefined {
   return cleaned || undefined;
 }
 
-// E.164 when the number is valid; otherwise keep what the lead typed so nothing is lost.
 function phone({ value, defaultCountry }: { value?: string; defaultCountry?: string }): string | undefined {
   const raw = value?.trim();
   if (!raw) {

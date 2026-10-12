@@ -8,8 +8,7 @@ export const ourCrm = createPiece({
   description: 'Send leads from ads and forms to the CRM without duplicates.',
   auth: ourCrmAuth,
   minimumSupportedRelease: '0.88.2',
-  // TODO: replace with our own CRM logo once branding assets exist.
-  logoUrl: 'https://cdn.activepieces.com/pieces/http.png',
+  logoUrl: 'https://cdn.activepieces.com/pieces/new-core/http.svg',
   categories: [PieceCategory.SALES_AND_CRM],
   authors: ['tccmobile'],
   actions: [

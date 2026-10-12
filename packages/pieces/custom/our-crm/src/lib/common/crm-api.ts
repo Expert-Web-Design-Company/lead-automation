@@ -1,14 +1,6 @@
 import { AuthenticationType, httpClient, HttpMethod } from '@activepieces/pieces-common';
 import { PermanentDeliveryError } from './delivery';
 
-// ASSUMED CRM CONTRACT — not yet confirmed by the CRM team (see .claude/CLAUDE.md §4.1).
-// Every endpoint path and payload shape lives in this file so the real API can be
-// swapped in without touching the action or the delivery logic.
-//
-//   GET  {base}/api/v1/leads/fields  -> { fields: CrmField[] }
-//   POST {base}/api/v1/leads/upsert  -> 201 (created) | 200 (updated), body { id, status? }
-//        header Idempotency-Key: <tenant>:<source>:<external_lead_id>
-
 const REQUEST_TIMEOUT_MS = 15_000;
 
 async function listFields({ connection }: { connection: CrmConnection }): Promise<CrmField[]> {
@@ -37,7 +29,6 @@ async function upsertLead({
     headers: { 'Idempotency-Key': idempotencyKey },
     body: lead,
     timeout: REQUEST_TIMEOUT_MS,
-    // Lead payloads carry PII; keep it out of error messages and logs.
     redactBodyInErrors: true,
   });
   const id = response.body?.id;

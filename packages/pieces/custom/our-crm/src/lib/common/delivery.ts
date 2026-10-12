@@ -4,8 +4,6 @@ const MAX_ATTEMPTS = 4;
 const BASE_DELAY_MS = 1_000;
 const MAX_DELAY_MS = 10_000;
 
-// Rejections that will fail the same way on every retry: bad credentials, wrong
-// endpoint, or data the CRM refuses. Retrying these only hides the problem.
 const PERMANENT_STATUSES = new Set([400, 401, 403, 404, 409, 422]);
 
 async function withRetries<T>({ send }: { send: () => Promise<T> }): Promise<{ result: T; attempts: number }> {
@@ -70,13 +68,11 @@ function extractCrmMessage(body: unknown): string | undefined {
   return undefined;
 }
 
-// Exponential backoff with full jitter, capped.
 function backoffDelayMs(attempt: number): number {
   const ceiling = Math.min(MAX_DELAY_MS, BASE_DELAY_MS * 2 ** (attempt - 1));
   return Math.round(Math.random() * ceiling);
 }
 
-// Thrown for failures that a retry cannot fix, e.g. a CRM success response we cannot use.
 export class PermanentDeliveryError extends Error {}
 
 export const delivery = { withRetries, classifyFailure };
