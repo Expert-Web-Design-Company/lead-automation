@@ -33,7 +33,11 @@ import {
   useRequiredActionsCheck,
 } from './required-actions-dialog';
 
-const PublishFlowReminderWidget = () => {
+const PublishFlowReminderWidget = ({
+  variant = 'banner',
+}: {
+  variant?: 'banner' | 'header';
+}) => {
   const [
     isSaving,
     isPublishing,
@@ -130,6 +134,64 @@ const PublishFlowReminderWidget = () => {
     isPublishing,
     isSaving,
   });
+  const actionButtons = (
+    <div className="flex items-center gap-2">
+      {!isNil(flow.publishedVersionId) && !isSaving && (
+        <Button
+          size="sm"
+          variant="ghost"
+          className="hover:bg-gray-4 text-gray-12"
+          onClick={() => discardChange()}
+        >
+          {t('Discard changes')}
+        </Button>
+      )}
+
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <div>
+            <Button
+              size="sm"
+              variant="default"
+              className="z-50"
+              loading={isSaving}
+              //for e2e tests
+              name="Publish"
+              onClick={handlePublish}
+              disabled={!isValid}
+            >
+              {requiresApproval ? t('Request approval') : t('Publish')}
+            </Button>
+          </div>
+        </TooltipTrigger>
+        {isSaving && <TooltipContent>{t('Saving...')}</TooltipContent>}
+        {!isValid && (
+          <TooltipContent>{t('You have incomplete steps')}</TooltipContent>
+        )}
+      </Tooltip>
+    </div>
+  );
+  const requiredActionsDialog = (
+    <RequiredActionsDialog
+      failedCheck={failedRequiredActionsCheck}
+      onClose={() => setFailedRequiredActionsCheck(null)}
+    />
+  );
+  if (variant === 'header') {
+    return (
+      <div className="flex items-center gap-2">
+        {showLoading ? (
+          <div className="flex items-center gap-2 text-sm text-gray-11">
+            <LoadingSpinner className="size-4 stroke-gray-11" />
+            {loadingText}
+          </div>
+        ) : (
+          actionButtons
+        )}
+        {requiredActionsDialog}
+      </div>
+    );
+  }
   return (
     <LargeWidgetWrapper>
       <div className="flex items-center gap-2">
@@ -139,46 +201,9 @@ const PublishFlowReminderWidget = () => {
       {showLoading ? (
         <LoadingSpinner className="size-5 stroke-gray-12" />
       ) : (
-        <div className="flex items-center gap-2">
-          {!isNil(flow.publishedVersionId) && !isSaving && (
-            <Button
-              size="sm"
-              variant="ghost"
-              className="hover:bg-gray-4 text-gray-12"
-              onClick={() => discardChange()}
-            >
-              {t('Discard changes')}
-            </Button>
-          )}
-
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <div>
-                <Button
-                  size="sm"
-                  variant="default"
-                  className="z-50"
-                  loading={isSaving}
-                  //for e2e tests
-                  name="Publish"
-                  onClick={handlePublish}
-                  disabled={!isValid}
-                >
-                  {requiresApproval ? t('Request approval') : t('Publish')}
-                </Button>
-              </div>
-            </TooltipTrigger>
-            {isSaving && <TooltipContent>{t('Saving...')}</TooltipContent>}
-            {!isValid && (
-              <TooltipContent>{t('You have incomplete steps')}</TooltipContent>
-            )}
-          </Tooltip>
-        </div>
+        actionButtons
       )}
-      <RequiredActionsDialog
-        failedCheck={failedRequiredActionsCheck}
-        onClose={() => setFailedRequiredActionsCheck(null)}
-      />
+      {requiredActionsDialog}
     </LargeWidgetWrapper>
   );
 };

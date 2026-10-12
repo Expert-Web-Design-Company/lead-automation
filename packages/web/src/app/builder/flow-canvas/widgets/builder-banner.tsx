@@ -5,7 +5,6 @@ import { ResourceLockWidget } from '@/components/custom/resource-lock-widget';
 import { useBuilderStateContext } from '../../builder-hooks';
 
 import { FlowApprovalBanner } from './flow-approval-banner';
-import { PublishFlowReminderWidget } from './publish-flow-reminder-widget';
 import { RunInfoWidget } from './run-info-widget';
 import { useFlowLock } from './use-flow-lock';
 import { ViewingOldVersionWidget } from './viewing-old-version-widget';
@@ -30,7 +29,6 @@ const BuilderBanner = () => {
     <>
       <FlowApprovalBanner />
       <ViewingOldVersionWidget />
-      <PublishFlowReminderWidget />
     </>
   );
 };

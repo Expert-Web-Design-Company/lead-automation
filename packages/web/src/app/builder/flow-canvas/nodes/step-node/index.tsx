@@ -6,6 +6,7 @@ import {
 } from '@activepieces/shared';
 import { useDraggable } from '@dnd-kit/core';
 import { Handle, NodeProps, Position } from '@xyflow/react';
+import { t } from 'i18next';
 import React, { useMemo } from 'react';
 
 import { useBuilderStateContext } from '@/app/builder/builder-hooks';
@@ -197,7 +198,13 @@ const ApStepCanvasNode = React.memo(
                     stepDisplayName={step.displayName}
                     stepIndex={stepIndex}
                     isSkipped={isSkipped}
-                    pieceDisplayName={stepMetadata?.displayName ?? ''}
+                    pieceDisplayName={
+                      isTrigger
+                        ? stepMetadata?.displayName ?? ''
+                        : t('Action · {pieceName}', {
+                            pieceName: stepMetadata?.displayName ?? '',
+                          })
+                    }
                     stepName={step.name}
                   />
                   {!readonly && (

@@ -75,6 +75,9 @@ const PieceSettings = React.memo((props: PieceSettingsProps) => {
     !isNil(selectedAction) && (selectedAction.requireAuth ?? true);
   const showAuthForTrigger =
     !isNil(selectedTrigger) && (selectedTrigger.requireAuth ?? true);
+  const section = props.section ?? 'all';
+  const showConnection = section !== 'fields';
+  const showFields = section !== 'connection';
 
   if (!pieceModel && pieceModelNotFound) {
     return (
@@ -126,7 +129,7 @@ const PieceSettings = React.memo((props: PieceSettingsProps) => {
 
   return (
     <div className="flex flex-col gap-4 w-full">
-      {!pieceModel && (
+      {!pieceModel && showFields && (
         <div className="space-y-3">
           {Array.from({ length: 5 }).map((_, index) => (
             <div className="space-y-2" key={index}>
@@ -142,14 +145,16 @@ const PieceSettings = React.memo((props: PieceSettingsProps) => {
 
       {pieceModel && (
         <>
-          {pieceModel.auth && (showAuthForAction || showAuthForTrigger) && (
-            <ConnectionSelect
-              isTrigger={!isNil(selectedTrigger)}
-              piece={pieceModel}
-              disabled={props.readonly}
-            ></ConnectionSelect>
-          )}
-          {selectedAction && (
+          {showConnection &&
+            pieceModel.auth &&
+            (showAuthForAction || showAuthForTrigger) && (
+              <ConnectionSelect
+                isTrigger={!isNil(selectedTrigger)}
+                piece={pieceModel}
+                disabled={props.readonly}
+              ></ConnectionSelect>
+            )}
+          {showFields && selectedAction && (
             <>
               <GenericPropertiesForm
                 key={`${selectedAction.name}-essential`}
@@ -200,7 +205,7 @@ const PieceSettings = React.memo((props: PieceSettingsProps) => {
               )}
             </>
           )}
-          {selectedTrigger && (
+          {showFields && selectedTrigger && (
             <>
               <GenericPropertiesForm
                 key={`${selectedTrigger.name}-essential`}
@@ -338,4 +343,7 @@ type PieceSettingsProps = {
   step: PieceAction | PieceTrigger;
   flowId: string;
   readonly: boolean;
+  section?: PieceSettingsSection;
 };
+
+export type PieceSettingsSection = 'all' | 'connection' | 'fields';

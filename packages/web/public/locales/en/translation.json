@@ -3222,5 +3222,16 @@
   "No models available — ask your platform admin to add a provider.": "No models available — ask your platform admin to add a provider.",
   "{input} in · {output} out": "{input} in · {output} out",
   "Couldn't load {key} models": "Couldn't load {key} models",
-  "Flows and agents that use this key will fail.": "Flows and agents that use this key will fail."
+  "Flows and agents that use this key will fail.": "Flows and agents that use this key will fail.",
+  "Choose an app, an event and an account to continue": "Choose an app, an event and an account to continue",
+  "Fill in the required fields to continue": "Fill in the required fields to continue",
+  "Completed": "Completed",
+  "Test": "Test",
+  "App & event": "App & event",
+  "Action event": "Action event",
+  "Trigger event": "Trigger event",
+  "Not selected": "Not selected",
+  "This app does not need an account. Continue to configure it.": "This app does not need an account. Continue to configure it.",
+  "Continue to next step": "Continue to next step",
+  "Action · {pieceName}": "Action · {pieceName}"
 }

@@ -45,6 +45,7 @@ import { cn } from '@/lib/utils';
 
 import FlowActionMenu from '../../components/flow-actions-menu';
 import { flowCanvasConsts } from '../flow-canvas/utils/consts';
+import { PublishFlowReminderWidget } from '../flow-canvas/widgets/publish-flow-reminder-widget';
 
 import { BuilderFlowStatusSection } from './flow-status';
 
@@ -202,6 +203,7 @@ export const BuilderHeader = () => {
       )}
 
       <BuilderFlowStatusSection></BuilderFlowStatusSection>
+      <PublishFlowReminderWidget variant="header" />
       <FlowCreatedByBadge createdBy={flow.createdBy} />
     </div>
   );

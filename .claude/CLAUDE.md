@@ -53,6 +53,10 @@ one **Trigger** step, then **Action** steps, each step with Setup → Configure 
   `docker compose -p activepieces up -d`). Back up `.env` (holds AP_ENCRYPTION_KEY).
   Server minimum 2 vCPU / 4 GB; HTTPS is mandatory (Google and Meta only post to HTTPS).
   If our CRM is on a private network, allow it via `AP_SSRF_ALLOW_LIST`.
+- Cloud sandbox preview (no internet to download Redis, no IPv6): run
+  `REDISMS_SYSTEM_BINARY=/usr/bin/redis-server AP_DEV_PIECES=our-crm,google-ads-leads npx turbo run serve --filter=web --filter=api --filter=@activepieces/engine --filter=worker --env-mode=loose`
+  and temporarily change `host: '::'` to `'0.0.0.0'` in `packages/server/api/src/main.ts`
+  (never commit that). Dev login: dev@ap.com / 12345678.
 
 ## 4. Pieces we build (Phase 1)
 
@@ -123,6 +127,16 @@ Plus failure alerts (Slack/email) — upstream's alerts module is `ee`, so build
 This needs core changes (new entity, API module, web route): keep them in their own
 `lead-inbox` module, register the entity in `getEntities()`, filter every query by
 `projectId`/`platformId`, and never import from `ee`.
+
+## 5b. Builder UI: Zapier-style (owner requirement)
+Our marketers are trained on Zapier, so the builder must *work* like Zapier (look/branding may
+differ; never copy Zapier's name, logo or orange). Implemented in `packages/web`:
+- App steps open a **Setup → Configure → Test** tab panel with ✓ per tab and a **Continue**
+  button: `src/app/builder/step-settings/step-wizard/` (completion rules in `step-wizard-utils.ts`).
+  Code/loop/router/agent steps and run viewing keep the upstream layout.
+- Action cards read "Action · <app>"; the trigger keeps its "Trigger" tab; vertical canvas is default.
+- **Publish** lives in the header (`PublishFlowReminderWidget variant="header"`), not as a canvas banner.
+- Keep new UI in new files; upstream files only get small, additive edits.
 
 ## 6. Field mapping rules
 | Source field | CRM field | Rule |

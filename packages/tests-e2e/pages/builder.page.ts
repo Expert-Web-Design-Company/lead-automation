@@ -26,13 +26,30 @@ export class BuilderPage extends BasePage {
   }
 
   async testStep() {
-    await this.page.getByRole('button', { name: 'Test Step Ctrl + G' }).click();
+    if (await this.openTestTab()) {
+      await this.page.getByRole('button', { name: /^(Test|Retest) Step/ }).first().click();
+    } else {
+      await this.page.getByRole('button', { name: 'Test Step Ctrl + G' }).click();
+    }
     await this.page.waitForTimeout(8000);
   }
 
   async testTrigger() {
-    await this.page.getByTestId('test-trigger-button').click();
+    if (await this.openTestTab()) {
+      await this.page.getByRole('button', { name: /^(Test|Retest) Trigger/ }).first().click();
+    } else {
+      await this.page.getByTestId('test-trigger-button').click();
+    }
     await this.page.waitForTimeout(5000);
+  }
+
+  async openTestTab() {
+    const testTab = this.page.getByRole('tab', { name: /Test$/ });
+    if (!(await testTab.isVisible())) {
+      return false;
+    }
+    await testTab.click();
+    return true;
   }
 
   async handleDismissButton() {

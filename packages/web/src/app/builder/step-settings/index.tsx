@@ -45,6 +45,7 @@ import { PieceSettings } from './piece-settings';
 import { RouterSettings } from './router-settings';
 import { StepNavigationButtons } from './step-navigation-buttons';
 import { useStepSettingsContext } from './step-settings-context';
+import { PieceStepWizard } from './step-wizard';
 import { UpdatePieceVersionDialog } from './update-piece-version-dialog/update-piece-version-dialog';
 
 const StepSettingsContainer = () => {
@@ -172,6 +173,16 @@ const StepSettingsContainer = () => {
   }, []);
 
   const showTestPanel = showGenerateSampleData || showStepInputOutFromRun;
+  const wizardStep =
+    (modifiedStep.type === FlowActionType.PIECE && !runAgentStep) ||
+    modifiedStep.type === FlowTriggerType.PIECE
+      ? modifiedStep
+      : null;
+  const showStepWizard =
+    !isNil(wizardStep) &&
+    !isNil(project) &&
+    showGenerateSampleData &&
+    isNil(run);
 
   const settingsForm = (
     <ScrollArea className="h-full">
@@ -335,30 +346,41 @@ const StepSettingsContainer = () => {
           key={`${selectedStep.name}-${selectedStep.type}`}
         >
           <StepTestRunnerProvider step={selectedStep}>
-            <StepSettingsLayout
-              isSplit={
-                showTestPanel &&
-                isStepDataPanelOpen &&
-                stepDataPanelView === 'split'
-              }
-              showTestPanel={showTestPanel}
-              isStepDataPanelOpen={isStepDataPanelOpen}
-              settingsForm={settingsForm}
-              testPanelHost={
-                showTestPanel ? (
-                  <StepDataPanelHost
-                    mode={stepDataPanelView === 'split' ? 'split' : 'drawer'}
-                    flowId={flowVersion.flowId}
-                    flowVersionId={flowVersion.id}
-                    projectId={project?.id}
-                    stepType={modifiedStep.type}
-                    showGenerateSampleData={showGenerateSampleData}
-                    showStepInputOutFromRun={showStepInputOutFromRun}
-                    saving={saving}
-                  />
-                ) : null
-              }
-            />
+            {showStepWizard && wizardStep ? (
+              <PieceStepWizard
+                step={wizardStep}
+                flowId={flowVersion.flowId}
+                flowVersionId={flowVersion.id}
+                projectId={project.id}
+                readonly={readonly}
+                saving={saving}
+              />
+            ) : (
+              <StepSettingsLayout
+                isSplit={
+                  showTestPanel &&
+                  isStepDataPanelOpen &&
+                  stepDataPanelView === 'split'
+                }
+                showTestPanel={showTestPanel}
+                isStepDataPanelOpen={isStepDataPanelOpen}
+                settingsForm={settingsForm}
+                testPanelHost={
+                  showTestPanel ? (
+                    <StepDataPanelHost
+                      mode={stepDataPanelView === 'split' ? 'split' : 'drawer'}
+                      flowId={flowVersion.flowId}
+                      flowVersionId={flowVersion.id}
+                      projectId={project?.id}
+                      stepType={modifiedStep.type}
+                      showGenerateSampleData={showGenerateSampleData}
+                      showStepInputOutFromRun={showStepInputOutFromRun}
+                      saving={saving}
+                    />
+                  ) : null
+                }
+              />
+            )}
           </StepTestRunnerProvider>
         </DynamicPropertiesProvider>
       </form>
