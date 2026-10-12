@@ -1,0 +1,11 @@
+{
+  "fields": [
+    { "key": "full_name", "label": "Full name", "type": "text", "required": true },
+    { "key": "email", "label": "Email", "type": "text", "required": false },
+    { "key": "phone", "label": "Phone", "type": "text", "required": false },
+    { "key": "service_interest", "label": "Service interest", "type": "text", "required": true },
+    { "key": "budget", "label": "Budget (USD)", "type": "number", "required": false },
+    { "key": "consent_marketing", "label": "Marketing consent", "type": "boolean", "required": false },
+    { "key": "preferred_call_time", "label": "Preferred call time", "type": "date", "required": false }
+  ]
+}

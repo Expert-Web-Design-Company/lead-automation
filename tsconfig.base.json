@@ -955,6 +955,9 @@
       "@activepieces/piece-onfleet": [
         "packages/pieces/community/onfleet/src/index.ts"
       ],
+      "@activepieces/piece-our-crm": [
+        "packages/pieces/custom/our-crm/src/index.ts"
+      ],
       "@activepieces/piece-outseta": [
         "packages/pieces/community/outseta/src/index.ts"
       ],

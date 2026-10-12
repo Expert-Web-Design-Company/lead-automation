@@ -10839,6 +10839,21 @@
         "vitest": "3.2.6",
       },
     },
+    "packages/pieces/custom/our-crm": {
+      "name": "@activepieces/piece-our-crm",
+      "version": "0.0.1",
+      "dependencies": {
+        "@activepieces/core-piece-types": "workspace:*",
+        "@activepieces/core-utils": "workspace:*",
+        "@activepieces/pieces-common": "workspace:*",
+        "@activepieces/pieces-framework": "workspace:*",
+        "libphonenumber-js": "1.13.14",
+      },
+      "devDependencies": {
+        "tslib": "2.6.2",
+        "vitest": "3.2.6",
+      },
+    },
     "packages/pieces/framework": {
       "name": "@activepieces/pieces-framework",
       "version": "0.40.0",
@@ -12274,6 +12289,8 @@
     "@activepieces/piece-oracle-fusion-cloud-erp": ["@activepieces/piece-oracle-fusion-cloud-erp@workspace:packages/pieces/community/oracle-fusion-cloud-erp"],
 
     "@activepieces/piece-orimon": ["@activepieces/piece-orimon@workspace:packages/pieces/community/orimon"],
+
+    "@activepieces/piece-our-crm": ["@activepieces/piece-our-crm@workspace:packages/pieces/custom/our-crm"],
 
     "@activepieces/piece-outseta": ["@activepieces/piece-outseta@workspace:packages/pieces/community/outseta"],
 
@@ -16494,6 +16511,8 @@
     "libheif-js": ["libheif-js@1.19.8", "", {}, "sha512-vQJWusIxO7wavpON1dusciL8Go9jsIQ+EUrckauFYAiSTjcmLAsuJh3SszLpvkwPci3JcL41ek2n+LUZGFpPIQ=="],
 
     "libmime": ["libmime@5.4.3", "", { "dependencies": { "encoding-japanese": "2.3.0", "iconv-lite": "0.7.3", "libbase64": "1.3.0", "libqp": "2.1.1" } }, "sha512-di9BoDabBUMqjeD/wGj+hHpSgdqAph5ui7w6OdY6NpzU6O6VFLQsMOg9tqCjm/zf9OHzAM9EZxSOF7uIb8O8Hw=="],
+
+    "libphonenumber-js": ["libphonenumber-js@1.13.14", "", {}, "sha512-llihgCcx0BFLksecLP+x1J+6JDE1GsXS1RN/LoPF6qcwpeQcnjj0lcvZxY8AzbEpYwyZWPZW/nDuqkqzm3amiw=="],
 
     "libqp": ["libqp@2.1.1", "", {}, "sha512-0Wd+GPz1O134cP62YU2GTOPNA7Qgl09XwCqM5zpBv87ERCXdfDtyKXvV7c9U22yWJh44QZqBocFnXN11K96qow=="],
 

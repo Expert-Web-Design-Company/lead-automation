@@ -1,0 +1,25 @@
+{
+  "name": "@activepieces/piece-our-crm",
+  "version": "0.0.1",
+  "type": "commonjs",
+  "main": "./dist/src/index.js",
+  "types": "./dist/src/index.d.ts",
+  "dependencies": {
+    "@activepieces/pieces-common": "workspace:*",
+    "@activepieces/pieces-framework": "workspace:*",
+    "@activepieces/core-piece-types": "workspace:*",
+    "@activepieces/core-utils": "workspace:*",
+    "libphonenumber-js": "1.13.14"
+  },
+  "devDependencies": {
+    "tslib": "2.6.2",
+    "vitest": "3.2.6"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.lib.json && cp package.json dist/",
+    "bundle": "node ../../../../dist/packages/cli/src/index.js pieces bundle",
+    "lint": "eslint 'src/**/*.ts'",
+    "test": "vitest run",
+    "mock-crm": "node dev/mock-crm.mjs"
+  }
+}
